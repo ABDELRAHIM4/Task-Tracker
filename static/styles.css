@@ -1,0 +1,68 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-image: url("{{ url_for('static', filename='/back.png') }}");
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    margin:0%;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: blueviolet;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+p {
+    border: 3px solid black;
+    border-radius: 5px;
+    width: 175px;
+    height: 40px;
+    background-color: white;
+
+}
+a {
+    width: 175px;
+    height: 40px;
+    background-color: white;
+}
+input {
+    color: rgb(255, 0, 0);
+    width: 30%;
+    height: 40px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+label {
+    color: blue;
+
+}
+h2 {
+    color: black;
+    border: 3px solid rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    width: 70px;
+    height: 30px;
+    background-color:white;
+}
+.login-container {
+    background-color: #f0f0f0;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+h3 {
+    color: black;
+    border: 3px solid rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    width: 85px;
+    height: 26px;
+    background-color:white;
+}
