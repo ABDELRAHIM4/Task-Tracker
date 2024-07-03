@@ -2,14 +2,7 @@
   "name": "task-tracker",
   "version": "1.0.0",
   "description": "A task tracking application",
-  "main": "index.js",
-  "scripts": {
-    "start": "node index.js"
-  },
-  "dependencies": {
-    "express": "^4.17.1",
-    "mongoose": "^6.0.1"
-  },
+  "dependencies": {},
   "author": "ABDELRAHIM",
   "license": "MIT"
 }
