@@ -4,13 +4,12 @@
   "description": "A task tracking application",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "build": "npm run build"
+    "start": "node index.js"
   },
   "dependencies": {
     "express": "^4.17.1",
     "mongoose": "^6.0.1"
   },
-  "author": "Your Name",
+  "author": "ABDELRAHIM",
   "license": "MIT"
 }
