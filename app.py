@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 from flask import render_template, redirect, url_for, request, flash, Flask
 from flask_login import login_user, login_required, logout_user, current_user, LoginManager, UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -5,8 +6,8 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'your_secret_key_here'  # Change this to a random secret key
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///tasks.db'  # Database file will be created in the project folder
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///tasks.db'
 db = SQLAlchemy(app)
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
@@ -17,6 +18,7 @@ class Task(db.Model):
     due_date = db.Column(db.DateTime, nullable=True)
     completed = db.Column(db.Boolean, default=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user = db.relationship('User', backref=db.backref('tasks', lazy=True))
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -27,7 +29,7 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 @app.route("/")
 def index():
-    return render_template('login.html')
+    return render_template('index.html')
 @login_manager.unauthorized_handler
 def unauthorized():
     flash('You must be logged in to access that page.', 'danger')
@@ -110,8 +112,10 @@ def edit_task(task_id):
     if request.method == 'POST':
         task.title = request.form['title']
         task.description = request.form['description']
-        task.due_date = request.form['due_date']
-
+        if request.form['due_date']:
+            task.due_date = datetime.strptime(request.form['due_date'], '%Y-%m-%d')
+        else:
+            flash('Due date is required!', 'warning')
         db.session.commit()
 
         flash('Task updated successfully!', 'success')
@@ -120,7 +124,7 @@ def edit_task(task_id):
     return render_template('edit_task.html', task=task)
 
 
-@app.route('/delete_task/<int:task_id>', methods=['POST'])
+@app.route('/delete_task/<int:task_id>', methods=['GET', 'POST'])
 @login_required
 def delete_task(task_id):
     task = Task.query.get_or_404(task_id)
@@ -141,6 +145,7 @@ def logout():
     logout_user()
     flash('Logged out successfully.', 'success')
     return redirect(url_for('login'))
+
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()

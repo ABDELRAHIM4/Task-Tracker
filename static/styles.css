@@ -17,15 +17,10 @@ body {
 p {
     border: 3px solid black;
     border-radius: 5px;
-    width: 175px;
+    width: 130px;
     height: 40px;
     background-color: white;
 
-}
-a {
-    width: 175px;
-    height: 40px;
-    background-color: white;
 }
 input {
     color: rgb(255, 0, 0);
@@ -58,11 +53,19 @@ h2 {
     flex-direction: column;
     align-items: center;
 }
-h3 {
+h4 {
     color: black;
     border: 3px solid rgba(0, 0, 0, 0.1);
     border-radius: 5px;
-    width: 85px;
-    height: 26px;
+    width: 115px;
+    height: 24px;
+    background-color:white;
+}
+h5 {
+    color: black;
+    border: 3px solid rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    width: 70px;
+    height: 30px;
     background-color:white;
 }

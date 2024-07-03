@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">\
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <title class="animate__animated animate__fadeInDown animated-delay1">Task Tracker - Stay Organized</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-image: url("{{ url_for('static', filename='back.png') }}");
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #fff;
+            background-color: rgba(0, 0, 0, 0.6);
+            background-blend-mode: overlay;
+        }
+        header {
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 1.5em;
+            margin-bottom: 0px;
+            width: auto;
+            height: auto;
+            color: black;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            color: #fff;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+        }
+
+        button a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        section {
+            margin: 20px 0;
+        }
+
+        h2 {
+            margin-bottom: 10px;
+            font-size: 2em;
+            width: auto;
+            height: auto;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul li {
+            font-size: 1.2em;
+            margin: 5px 0;
+        }
+        .animated-delay1 {
+            animation-delay: 0.5s;
+        }
+        .animated-delay2 {
+            animation-delay: 1s;
+        }
+        .animated-delay3 {
+            animation-delay: 1.5s;
+        }
+        .animated-delay4 {
+            animation-delay: 2s;
+        }
+        .animated-delay5 {
+            animation-delay: 2.5s;
+        }
+        .animated-delay6 {
+            animation-delay: 3s;
+        }
+        .animated-delay7 {
+            animation-delay: 3.5s;
+        }
+        
+    </style>
+</head>
+<body>
+    <!-- Intro Section -->
+    <header>
+        <h1 class="animate__animated animate__fadeInDown animated-delay2">Task Tracker</h1>
+        <p class="animate__animated animate__fadeInDown animated-delay2">Stay organized and focused with our task management tool.</p>
+        <button class="animate__animated animate__fadeInDown animated-delay3">Get Started</button>
+    </header>
+
+    <!-- Feature Section -->
+    <section>
+        <h2 class="animate__animated animate__fadeInDown animated-delay4">Features</h2>
+        <ul class="animate__animated animate__fadeInDown animated-delay5">
+            <li>-Easy task management</li>
+            <li>-Customizable due dates and reminders</li>
+            <li>-Collaboration features for teams</li>
+        </ul>
+    </section>
+
+    <!-- About Section -->
+    <section class="animate__animated animate__fadeInDown animated-delay6">
+        <h2>About</h2>
+        <p>Task Tracker is a project created by [ABDULRAHIM AHMED].</p>
+        <p>Learn more about our project and how it can help you stay organized.</p>
+    </section>
+
+    <!-- Call-to-Action Section -->
+    <section class="animate__animated animate__fadeInDown animated-delay7">
+        <h2>Try it Out</h2>
+        <button><a href="{{ url_for('login') }}">Login</a></button>
+        <button><a href="{{ url_for('register') }}">Register</a></button>
+    </section>
+</body>
+</html>

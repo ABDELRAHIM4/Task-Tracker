@@ -5,8 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Task Tracker</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-
-    
+    <style>
+      p {
+          border: 3px solid black;
+          border-radius: 5px;
+          width: 180px;
+          height: 60px;
+          background-color: white;
+      }
+      button {
+        border: 3px solid black;
+          border-radius: 5px;
+          width: 60px;
+          height: 40px;
+          background-color: white;
+      }
+      h2 {
+        color: black;
+        border: 3px solid rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        width: 90px;
+        height: auto;
+        background-color:white;
+      }
+  </style>
 </head>
 <body>
     <h2>Login</h2>
@@ -19,5 +41,16 @@
         <button type="submit">Login</button>
     </form>
     <p>Don't have an account? <a href="{{ url_for('register') }}">Register here</a>.</p>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="alert alert-{{ category }}">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
 </body>
 </html>
