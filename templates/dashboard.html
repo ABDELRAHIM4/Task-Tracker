@@ -7,24 +7,79 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <style>
         table{
-            border: 3px solid black;
+         border: 3px solid black;
             border-radius: 5px;
             width: 30%;
             height: auto;
             background-color: white;
         }
+    .task-table {
+    border-collapse: collapse;
+    width: 100%;
+    }
+    h1 {
+        color: black;
+        border: #ddd solid;
+        background-color: #ddd;
+        width: 90px;
+        height:auto;
+    }
+    p {
+        color: black;
+        border: #ddd solid;
+        background-color: #ddd;
+        width: 200px;
+        height:auto;
+    }
+    h2 {
+        color: black;
+        border: #ddd solid;
+        background-color: #ddd;
+        width: 90px;
+        height:auto;
+    }
+
+    .task-table th, .task-table td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: left;
+        }
+        h3 {
+            color: black;
+            border: #ddd solid;
+            background-color: #ddd;
+            width: 120px;
+            height:auto;
+        }
+
+    .task-table th {
+    background-color: #f0f0f0;
+    }
     </style>
+    <script>
+            const updateCurrentTime = () => {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            const formattedTime = `${hours}:${minutes}:${seconds}`;
+            document.getElementById('current-time').textContent = formattedTime;
+        };
+        
+        </script>
 </head>
 <body>
-    <p>Welcome, {{ current_user.username }}!</p>
-    <h4>Dashboard</h4>
-    <h5>Your Tasks</h5>
+    <p>Welcome {{ current_user.username }}</p>
+    <h2>Dashboard</h2>
+    <h3>Your Tasks</h3>
+    <a href="{{ url_for('add_task') }}">Add New Task</a>
     <table class="task-table">
         <thead>
             <tr>
                 <th>Task Name</th>
                 <th>Due Date</th>
                 <th>Created By</th>
+                <th>Hour</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -35,22 +90,47 @@
                 <td>{{ Task.title }}</td>
                 <td>{{ Task.due_date.strftime("%Y-%m-%d") }} </td>
                 <td>{{ Task.user.username }}</td>
-                <td>
-                    <a href="{{ url_for('edit_task', task_id=Task.id) }}">Edit</a>
-                    <a href="{{ url_for('delete_task', task_id=Task.id) }}">Delete</a>
+                <td>{{ Task.alert_hours }}</td>
+                <td class="actions" style="width: 100px; text-align: center;">
+                    <a href="{{ url_for('edit_task', task_id=Task.id) }}" style="display: block; margin-bottom: 5px;">Edit</a>
+                    <a href="{{ url_for('delete_task', task_id=Task.id) }}">Done?</a>
                 </td>
             </tr>
             {% endfor %}
             {% else %}
             <tr>
-                <td colspan="4">You Have No Tasks.</td>
+                <td colspan="5">You Have No Tasks.</td>
             </tr>
             {% endif %}
         </tbody>
+        <script>
+                const tasks = document.querySelectorAll('tbody tr');
+
+                const updatelist = () => {
+                const now = new Date();
+                tasks.forEach((task) => {
+                const duedateelement = task.cells[1];
+                const duedate = new Date(`${duedateelement.textContent} ${task.cells[3].textContent}`);
+                const timediff = duedate - now;
+                if (duedate < now) {
+                    task.remove();
+                } else if (duedate - now  < 3600000) {
+                    const taskTitle = task.cells[0].textContent;
+                    alert(`Task "${taskTitle}" is due soon!`);
+                }
+                });
+                };
+                window.onload = function() {
+                updatelist();
+                updateCurrentTime();
+                setInterval(updatelist, 360000);
+                setInterval(updateCurrentTime, 1000);
+                
+                };
+        </script>
     </table>
     <img src="{{ url_for('static', filename='back.png') }}" alt="Profile Picture" style="width: 100%; height: 100vh; object-fit: cover; position: absolute; top: 0; left: 0; z-index: -1;">
     
     <a href="{{ url_for('logout') }}">Logout</a>
-    <a href="{{ url_for('add_task') }}">Add New Task</a>
 </body>
 </html>

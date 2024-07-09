@@ -46,15 +46,30 @@
 </head>
 <body>
     <h2>Add New Task</h2>
-    <form action="{{ url_for('add_task') }}" method="post">
+    <form action="{{ url_for('add_task') }}" method="post" onsubmit="return validate()">
         <label for="title">Title:</label><br>
         <input type="text" id="title" name="title" required><br><br>
         <label for="description">Description:</label><br>
         <textarea id="description" name="description"></textarea><br><br>
         <label for="due_date">Due Date:</label><br>
         <input type="date" id="due_date" name="due_date"><br><br>
+        <input type="time" name="alert_hours" id="alert_hours" required>
         <button type="submit">Add Task</button>
     </form>
     <p><a href="{{ url_for('dashboard') }}">Back to Dashboard</a></p>
+    <script>
+        function validate() {
+            const duedateInput = document.getElementById('due_date');
+            const alert = document.getElementById('alert_hours');
+            const dueDate = new Date(`${duedateInput.value}T${alert.value}`);
+            const now = new Date();
+            const Hourfromnow = new Date(now.getTime() + 3600000);
+            if (dueDate < Hourfromnow) {
+                alert('Due date and time must be at least 1 hour from now');
+                return false;
+            }
+            return true;
+        }
+    </script>
 </body>
 </html>

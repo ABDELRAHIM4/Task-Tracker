@@ -5,13 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Task Tracker</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <style>
       p {
           border: 3px solid black;
           border-radius: 5px;
           width: 180px;
           height: 60px;
-          background-color: white;
+          background-color: black;
+          color:hsl(360, 10%, 100%, 1.0)
       }
       button {
         border: 3px solid black;
@@ -28,29 +30,63 @@
         height: auto;
         background-color:white;
       }
+      label {
+        text-align: center;
+        color: white;
+        box-sizing: content-box;
+
+      }
+      .animated-delay1 {
+            animation-delay: 0.5s;
+        }
+        .animated-delay2 {
+            animation-delay: 1s;
+        }
+        .animated-delay3 {
+            animation-delay: 1.5s;
+        }
+        .animated-delay4 {
+            animation-delay: 2s;
+        }
+        .animated-delay5 {
+            animation-delay: 2.5s;
+        }
+        .animated-delay6 {
+            animation-delay: 3s;
+        }
+        .animated-delay7 {
+            animation-delay: 3.5s;
+        }
   </style>
 </head>
 <body>
-    <h2>Login</h2>
+    <h2 class="animate__animated animate__fadeInDown animated-delay1">Login</h2>
     <img src="{{ url_for('static', filename='back.png') }}" alt="Profile Picture" style="width: 100%; height: 100vh; object-fit: cover; position: absolute; top: 0; left: 0; z-index: -1;">
     <form action="{{ url_for('login') }}" method="post">
-        <label for="username">Username:</label><br>
-        <input type="text" id="username" name="username" required><br><br>
-        <label for="password">Password:</label><br>
-        <input type="password" id="password" name="password" required><br><br>
-        <button type="submit">Login</button>
+        <label for="username" class="animate__animated animate__fadeInDown animated-delay2" style="text-align: center;">Username:</label><br>
+        <input type="text" id="username" name="username" required style="text-align: center;" class="animate__animated animate__fadeInDown animated-delay3"><br><br>
+        <label for="password" class="animate__animated animate__fadeInDown animated-delay4" style="text-align: center;">Password:</label><br>
+        <input type="password" id="password" name="password" style="text-align: center;" class="animate__animated animate__fadeInDown animated-delay5" required><br><br>
+        <button type="submit" class="animate__animated animate__fadeInDown animated-delay6" style="text-align: center;">Login</button>
     </form>
-    <p>Don't have an account? <a href="{{ url_for('register') }}">Register here</a>.</p>
+    <p class="animate__animated animate__fadeInDown animated-delay6">Don't have an account?<a href="{{ url_for('register') }}" class="animate__animated animate__fadeInDown animated-delay7">Register here</a>.</p>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
 {% with messages = get_flashed_messages(with_categories=true) %}
   {% if messages %}
     {% for category, message in messages %}
-      <div class="alert alert-{{ category }}">
+      <div class="alert alert-{{ category }} flash-message">
         {{ message }}
+        <script>
+          setTimeout( function() {
+          document.querySelector(".flash-message").remove();
+          }, 2000);
+        </script>
       </div>
     {% endfor %}
   {% endif %}
 {% endwith %}
+
+
 </body>
 </html>

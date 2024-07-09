@@ -16,6 +16,8 @@
         <textarea id="description" name="description">{{ task.description }}</textarea><br><br>
         <label for="due_date">Due Date:</label>
         <input type="date" id="due_date" name="due_date" value="{{ task.due_date }}" required>
+        <label for="alert_hours">hours</label>
+        <input type="time" name="alert_hours" id="alert_hours" value="{{ task.alert_hours }}" required>
         <span id="due-date-warning" style="color: red; display: none;">Due date is required!</span><br><br>
         <button type="submit">Update Task</button>
     </form>
